@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\QuestionnaireController;
+use App\Http\Controllers\QuestionnaireResultController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,10 @@ Route::get('/questionnaires', [QuestionnaireController::class, 'create'])
 Route::post('/questionnaires', [QuestionnaireController::class, 'store'])
     ->middleware('auth')
     ->name('submit-questionnaire');
+
+Route::get('/results', [QuestionnaireResultController::class, 'index'])
+    ->middleware('auth')
+    ->name('results');
+
 
 require __DIR__.'/auth.php';
