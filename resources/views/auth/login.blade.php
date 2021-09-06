@@ -12,6 +12,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <log-in></log-in>
+        <log-in
+            :log-in-url="{{ json_encode(route('login')) }}"
+        ></log-in>
     </x-auth-card>
 </x-guest-layout>

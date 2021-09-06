@@ -29,7 +29,9 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'is_admin' => ['required', 'boolean'],
+            'username' => ['required_without:subject_id', 'string'],
+            'subject_id' => ['required_without:username', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -45,11 +47,14 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        $isAdmin = $this->get('is_admin');
+        $loginCredentials = $isAdmin ? $this->only('username', 'password') : $this->only('subject_id', 'password');
+
+        if (! Auth::attempt($loginCredentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
+                $isAdmin ? 'username' : 'subject_id' => __('auth.failed'),
             ]);
         }
 
