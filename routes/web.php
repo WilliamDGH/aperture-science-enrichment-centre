@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionnaireController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/questionnaires', [QuestionnaireController::class, 'create'])
+    ->middleware('auth')
+    ->name('questionnaires');
+
+Route::post('/questionnaires', [QuestionnaireController::class, 'store'])
+    ->middleware('auth')
+    ->name('submit-questionnaire');
 
 require __DIR__.'/auth.php';
