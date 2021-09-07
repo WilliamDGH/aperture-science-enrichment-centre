@@ -42,4 +42,5 @@ Tailwind CSS
 3. `composer install`
 4. `npm install`
 5. `php artisan migrate`
-6. `php artisan serve`
+6. `npm run dev`
+7. `php artisan serve`
