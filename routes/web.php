@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\QuestionnaireController;
 use App\Http\Controllers\QuestionnaireResultController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return redirect()->intended('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['isAdmin' => Auth::user()->is_admin]);
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/questionnaires', [QuestionnaireController::class, 'create'])
