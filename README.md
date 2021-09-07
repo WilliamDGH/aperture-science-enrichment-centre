@@ -44,3 +44,5 @@ Tailwind CSS
 5. `php artisan migrate`
 6. `npm run dev`
 7. `php artisan serve`
+8. Login as GLaDOS with username `glados` and password `11111111`.
+9. You can now start creating test subjects. And the test subjects can use their subject ID and password to login and submit questionnaires.
