@@ -26,3 +26,20 @@ Vue
 PostgreSQL
 
 Tailwind CSS
+
+### Setup Project
+1. Clone project
+2. Set up databases
+
+`export PGPASSWORD=secret`
+
+`psql -h localhost -U postgres << EOF`
+
+    `CREATE DATABASE aperture_science_enrichment_centre WITH OWNER postgres;`
+    
+`EOF`
+
+3. `composer install`
+4. `npm install`
+5. `php artisan migrate`
+6. `php artisan serve`
